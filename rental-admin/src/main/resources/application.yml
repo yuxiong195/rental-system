@@ -1,0 +1,126 @@
+# 房东端管理系统配置
+server:
+  port: 8080
+  servlet:
+    context-path: /admin
+
+spring:
+  application:
+    name: rental-admin
+  
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/rental_system?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 监控配置
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: admin123
+        reset-enable: false
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 2000
+  
+  # Redis配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath*:mapper/**/*.xml
+
+# JWT配置
+jwt:
+  secret: rental-system-admin-secret-key-2024
+  expiration: 86400  # 24小时
+
+# Knife4j API文档配置
+knife4j:
+  enable: true
+  openapi:
+    title: 房租管理系统 - 房东端API
+    description: 房东端管理系统接口文档
+    version: 1.0.0
+    contact:
+      name: 开发团队
+      email: dev@rental.com
+    license:
+      name: MIT
+      url: https://opensource.org/licenses/MIT
+  setting:
+    language: zh_cn
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+
+# 日志配置
+logging:
+  level:
+    com.rental: debug
+    org.springframework.web: info
+    org.mybatis: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n'
+  file:
+    name: logs/rental-admin.log
+    max-size: 10MB
+    max-history: 30
+
+# 业务配置
+rental:
+  # 文件上传配置
+  file:
+    upload-path: /uploads/
+    max-size: 10MB
+    allowed-types: jpg,jpeg,png,gif,pdf,doc,docx
+  
+  # 短信配置
+  sms:
+    # 这里配置实际的短信服务商参数
+    provider: mock  # mock/aliyun/tencent
+    app-id: your-app-id
+    app-secret: your-app-secret
+    sign-name: 房租管理系统
+    template-code: SMS_123456789

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rental.common.mapper.MeterReadingMapper">
+
+    <!-- 批量插入抄表记录 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO meter_readings (
+            room_id, reading_month, water_reading, electricity_reading,
+            prev_water_reading, prev_electricity_reading, water_usage, electricity_usage,
+            reading_date, images, created_at
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.roomId}, #{item.readingMonth}, #{item.waterReading}, #{item.electricityReading},
+                #{item.prevWaterReading}, #{item.prevElectricityReading}, #{item.waterUsage}, #{item.electricityUsage},
+                #{item.readingDate}, #{item.images}, #{item.createdAt}
+            )
+        </foreach>
+    </insert>
+
+</mapper>
