@@ -13,6 +13,7 @@ import com.rental.common.mapper.MeterReadingMapper;
 import com.rental.common.mapper.PropertyMapper;
 import com.rental.common.mapper.RoomMapper;
 import com.rental.common.service.MeterReadingService;
+import com.rental.common.service.BillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class MeterReadingServiceImpl implements MeterReadingService {
     
     @Autowired
     private PropertyMapper propertyMapper;
+    
+    @Autowired
+    private BillService billService;
     
     @Override
     public IPage<MeterReading> getMeterReadingPage(Long current, Long size, Long landlordId, 
@@ -284,16 +288,8 @@ public class MeterReadingServiceImpl implements MeterReadingService {
         // 验证抄表记录
         MeterReading meterReading = getMeterReadingById(readingId, landlordId);
         
-        // TODO: 实现账单生成逻辑
-        // 1. 获取房间费用标准
-        // 2. 计算各项费用
-        // 3. 创建账单记录
-        // 4. 发送通知给租客
-        
-        log.info("房东{}基于抄表记录{}生成账单", landlordId, readingId);
-        
-        // 这里返回模拟的账单ID，实际实现时需要创建真实的账单记录
-        return 1L;
+        // 调用账单服务生成账单
+        return billService.generateBillFromMeterReading(readingId, landlordId);
     }
     
     /**
