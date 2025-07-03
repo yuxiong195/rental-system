@@ -75,24 +75,23 @@ jwt:
   secret: rental-system-admin-secret-key-2024
   expiration: 86400  # 24小时
 
-# Knife4j API文档配置
-knife4j:
-  enable: true
-  openapi:
-    title: 房租管理系统 - 房东端API
-    description: 房东端管理系统接口文档
-    version: 1.0.0
-    contact:
-      name: 开发团队
-      email: dev@rental.com
-    license:
-      name: MIT
-      url: https://opensource.org/licenses/MIT
-  setting:
-    language: zh_cn
-    enable-swagger-models: true
-    enable-document-manage: true
-    swagger-model-name: 实体类列表
+# SpringDoc OpenAPI 3.0 配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: alpha
+    tags-sorter: alpha
+    filter: true
+  show-actuator: false
+  group-configs:
+    - group: '房租管理系统API'
+      paths-to-match: '/**'
+      packages-to-scan: com.rental.admin.controller
 
 # 日志配置
 logging:

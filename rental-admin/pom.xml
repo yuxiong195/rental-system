@@ -21,6 +21,12 @@
             <artifactId>rental-common</artifactId>
         </dependency>
 
+        <!-- SpringDoc OpenAPI 3.0 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
         <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

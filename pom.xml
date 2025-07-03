@@ -20,11 +20,11 @@
         <mybatis-plus.version>3.5.6</mybatis-plus.version>
         <mysql.version>8.0.33</mysql.version>
         <druid.version>1.2.21</druid.version>
-        <knife4j.version>4.4.0</knife4j.version>
         <jwt.version>4.4.0</jwt.version>
         <hutool.version>5.8.27</hutool.version>
         <lombok.version>1.18.32</lombok.version>
         <fastjson.version>2.0.49</fastjson.version>
+        <springdoc.version>2.2.0</springdoc.version>
     </properties>
 
     <modules>
@@ -63,6 +63,13 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+
+            <!-- SpringDoc OpenAPI 3.0 (替代Knife4j) -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
 
             <!-- JWT -->

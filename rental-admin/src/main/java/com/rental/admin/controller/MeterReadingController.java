@@ -18,10 +18,11 @@ import jakarta.validation.constraints.Pattern;
 import java.util.List;
 
 /**
- * 抄表记录管理控制器
+ * 📊 抄表记录管理控制器
+ * 提供抄表记录CRUD、批量操作、统计查询等功能
  */
 @Slf4j
-@Tag(name = "抄表管理", description = "抄表记录增删改查，支持批量操作")
+@Tag(name = "📊 抄表管理", description = "抄表记录增删改查，支持批量操作、用量计算、月度统计")
 @RestController
 @RequestMapping("/meter-readings")
 @Validated

@@ -20,10 +20,11 @@ import jakarta.validation.constraints.Pattern;
 import java.util.List;
 
 /**
- * 房间管理控制器
+ * 🏠 房间管理控制器
+ * 提供房间CRUD、费用管理、租客绑定等核心功能
  */
 @Slf4j
-@Tag(name = "房间管理", description = "房间增删改查、费用管理、租客绑定")
+@Tag(name = "🏠 房间管理", description = "房间增删改查、费用管理、租客绑定等核心功能")
 @RestController
 @RequestMapping("/rooms")
 @Validated
